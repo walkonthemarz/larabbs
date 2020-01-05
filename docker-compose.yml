@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  larabbs:
+    image: walkonthemarz/php-apache
+    restart: always
+    environment:
+     - DB_DATABASE=pma_db
+    volumes:
+      - "./:/var/www"
+      - "./docker/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
+      - "./docker/php.ini-production:/usr/local/etc/php/php.ini"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.larabbs.rule=Host(`larabbs.localhost`)"
+
+networks:
+  default:
+    external:
+      name: rightcapital
