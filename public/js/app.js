@@ -6374,19 +6374,9 @@ module.exports = {
  * @license  MIT
  */
 
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
 }
 
 
@@ -37081,8 +37071,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/rick/practise/larabbs/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/rick/practise/larabbs/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/rick/larabbs/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/rick/larabbs/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
