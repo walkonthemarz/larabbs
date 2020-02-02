@@ -5,7 +5,7 @@ services:
     image: walkonthemarz/php-apache
     restart: always
     environment:
-     - DB_DATABASE=pma_db
+     - DB_HOST=host.docker.internal
     volumes:
       - "./:/var/www"
       - "./docker/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
