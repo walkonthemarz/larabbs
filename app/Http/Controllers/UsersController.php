@@ -33,7 +33,7 @@ class UsersController extends Controller
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
         $this->authorize('update', $user);
-        
+
         $data = $request->all();
 
         if (isset($request->avatar)) {
