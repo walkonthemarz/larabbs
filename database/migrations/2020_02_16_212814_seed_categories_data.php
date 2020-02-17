@@ -42,6 +42,6 @@ class SeedCategoriesData extends Migration
      */
     public function down()
     {
-        DB::truncate('categories');
+        DB::table('categories')->truncate();
     }
 }
