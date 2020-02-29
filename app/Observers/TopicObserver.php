@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\TranslateSlug;
 use App\Models\Topic;
 use App\Handlers\SlugTranslateHandler;
 
@@ -24,9 +25,12 @@ class TopicObserver
     {
         $topic->body    = clean($topic->body, 'user_topic_body');
         $topic->excerpt = make_excerpt($topic->body);
+    }
 
+    public function saved(Topic $topic)
+    {
         if ($topic->slug === null) {
-            $topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
+            dispatch(new TranslateSlug($topic));
         }
     }
 }
