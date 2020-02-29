@@ -16,9 +16,9 @@ class Topic extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scopeWithOrder($query, string $order=null)
+    public function scopeWithOrder($query, string $order = null)
     {
-        switch ($order){
+        switch ($order) {
             case 'recent':
                 $query->recent();
                 break;
@@ -37,5 +37,10 @@ class Topic extends Model
     public function scopeRecentReplied($query)
     {
         return $query->orderBy('updated_at', 'desc');
+    }
+
+    public function link(array $parameters = [])
+    {
+        return route('topics.show', array_merge([$this->id, $this->slug], $parameters));
     }
 }
